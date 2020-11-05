@@ -1,7 +1,7 @@
 # julia
 using FASTX
 using BioSequences
-# create function for gc content calculation
+# create function for cys content calculation
 function cys_content(seq)
     comp = composition(seq)
     return round(comp[AA_C] * 100 / length(seq), digits = 2)
