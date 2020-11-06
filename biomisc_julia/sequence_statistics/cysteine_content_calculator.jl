@@ -15,3 +15,4 @@ open(ARGS[2],"a") do io
     end
 end
 close(reader)
+ 
