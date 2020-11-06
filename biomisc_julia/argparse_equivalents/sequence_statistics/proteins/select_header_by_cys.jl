@@ -30,12 +30,12 @@ function main()
     # main
     reader = open(FASTA.Reader, parsed_args["in"])
     open(parsed_args["out"],"a") do io
-    for record in reader
-        if parse(Int, parsed_args["min"]) < cys_content(FASTA.sequence(record)) < parse(Int, parsed_args["max"])
-            println(io,FASTA.identifier(record),"\t",FASTA.description(record))
+        for record in reader
+            if parse(Int, parsed_args["min"]) < cys_content(FASTA.sequence(record)) < parse(Int, parsed_args["max"])
+                println(io,FASTA.identifier(record),"\t",FASTA.description(record))
+            end
         end
     end
-end
     close(reader)
 end
 
