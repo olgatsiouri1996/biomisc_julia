@@ -31,12 +31,12 @@ function main()
     # main
     reader = open(FASTA.Reader, parsed_args["in"])
     open(parsed_args["out"],"a") do io
-    for record in reader
-        if parse(Int, parsed_args["min"]) < at_content(FASTA.sequence(record)) < parse(Int, parsed_args["max"])
-            println(io, record)  
+        for record in reader
+            if parse(Int, parsed_args["min"]) < at_content(FASTA.sequence(record)) < parse(Int, parsed_args["max"])
+                println(io, record)  
+            end
         end
-    end
-end    
+    end    
     close(reader)
 end
 
