@@ -12,7 +12,7 @@ print("calculate the %AT content of a multi or single fasta file and outputs in 
 reader = open(FASTA.Reader,ARGS[1])
 open(ARGS[2],"a") do io
    for record in reader
-    println(io,FASTA.identifier(record),"\t",at_content(FASTA.sequence(record)))
+        println(io,FASTA.identifier(record),"\t",at_content(FASTA.sequence(record)))
     end
 end
 close(reader)
