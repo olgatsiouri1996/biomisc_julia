@@ -29,14 +29,14 @@ function main()
         return round(at * 100 / (comp[DNA_C] + comp[DNA_G] + comp[DNA_S] + comp[DNA_W] + comp[DNA_T] + comp[DNA_A]), digits = 2)
     end
     # main
-    eader = open(FASTA.Reader, parsed_args["in"])
+    reader = open(FASTA.Reader, parsed_args["in"])
     open(parsed_args["out"],"a") do io
-    for record in reader
-        if parse(Int, parsed_args["min"]) < at_content(FASTA.sequence(record)) < parse(Int, parsed_args["max"])
-            println(io,FASTA.identifier(record),"\t",at_content(FASTA.sequence(record)))
+        for record in reader
+            if parse(Int, parsed_args["min"]) < at_content(FASTA.sequence(record)) < parse(Int, parsed_args["max"])
+                println(io,FASTA.identifier(record),"\t",at_content(FASTA.sequence(record)))
+            end
         end
-    end
-end    
+    end    
     close(reader)
 end
 
