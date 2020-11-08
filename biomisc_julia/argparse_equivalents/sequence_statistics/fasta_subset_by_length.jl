@@ -5,7 +5,7 @@ using FASTX
 # input parameters function
 function parse_commandline()
 
-    s = ArgParseSettings(description = "collect proteins with user specified length")
+    s = ArgParseSettings(description = "collect sequences with user specified length")
     @add_arg_table s begin
         "--in"
             help = "input fasta file"
