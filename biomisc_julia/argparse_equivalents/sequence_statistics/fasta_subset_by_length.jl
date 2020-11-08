@@ -32,3 +32,5 @@ function main()
     end    
     close(reader)
 end
+
+main()
