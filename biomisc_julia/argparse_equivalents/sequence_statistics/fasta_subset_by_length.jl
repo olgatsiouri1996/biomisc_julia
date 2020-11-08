@@ -9,8 +9,6 @@ function parse_commandline()
     @add_arg_table s begin
         "--in"
             help = "input fasta file"
-        "--aa"
-            help = "amino acid to search the content for"
         "--min"
             help = "min length"
         "--max"
