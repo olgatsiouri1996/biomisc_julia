@@ -4,7 +4,7 @@ using Pandas
 # input parameters function
 function parse_commandline()
 
-    s = ArgParseSettings(description = "merge 2 txt files and print the common lines by column")
+    s = ArgParseSettings(description = "merge 2 txt files by column and print the common lines ")
     @add_arg_table s begin
         "--tab1"
             help = "input txt file"
