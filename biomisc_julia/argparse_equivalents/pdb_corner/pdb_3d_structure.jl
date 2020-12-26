@@ -26,4 +26,4 @@ function main()
 	viewstruc(struc[parsed_args["model"]])	
 end
 
-main()	
+main()	 
