@@ -27,5 +27,5 @@ function main()
 	struc = read(parsed_args["pdb"], PDB)
 	viewstruc(struc[parsed_args["model"]][parsed_args["chain"]])	
 end
-
+ 
 main()	
