@@ -18,8 +18,8 @@ function parse_commandline()
             help = "1st selected chain in model" 
         "--second"
             help = "2nd selected chain in model"    
-        "--out"
-            help = "output png file"   
+        "--pdf"
+            help = "output pdf file"   
     end
     return parse_args(s)
 end
@@ -33,7 +33,7 @@ function main()
     cbetas_B = collectatoms(s[parsed_args["model"]][parsed_args["second"]], cbetaselector)
     dm = DistanceMap(cbetas_A, cbetas_B)
     plot(dm)
-    png(parsed_args["out"])
+    savefig(parsed_args["pdf"])
 end
 
 main()

@@ -21,8 +21,8 @@ function parse_commandline()
         "--dist"
             help = "distance in Angstrem to choose as cutoff for contact"
             arg_type = Float64    
-        "--out"
-            help = "output png file"   
+        "--pdf"
+            help = "output pdf file"   
     end
     return parse_args(s)
 end
@@ -36,7 +36,7 @@ function main()
     cbetas_B = collectatoms(s[parsed_args["model"]][parsed_args["second"]], cbetaselector)
     cm = ContactMap(cbetas_A, cbetas_B, parsed_args["dist"])
     plot(cm)
-    png(parsed_args["out"])
+    savefig(parsed_args["pdf"])
 end
 
 main()
