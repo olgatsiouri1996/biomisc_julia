@@ -25,8 +25,7 @@ function main()
     reader = open(FASTA.Reader, parsed_args["in"])
     open(parsed_args["out"],"a") do io
         for record in reader
-            merged_seqs = join(FASTA.sequence(record))
-        print(io,merged_seqs)
+            print(io,join(FASTA.sequence(record)))
         end
     end
     close(reader)
