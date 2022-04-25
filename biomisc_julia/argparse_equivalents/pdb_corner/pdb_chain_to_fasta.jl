@@ -12,10 +12,14 @@ function parse_commandline()
             required = true
         "--model"
             help = "model to make the fasta file for. Type 1 if you have only 1 model"
-            required = true
+            arg_type = Int
+            default = 1
+            required = false
         "--chain"
             help = "chain in model to make the fasta file for"
-            required = true
+            required = false
+            arg_type = String
+            default = "A"
     end
     return parse_args(s)
 end
@@ -27,7 +31,7 @@ function main()
     downloadpdb(parsed_args["pdb"]) do fp
         s = read(fp, PDB)
         id = String(join([parsed_args["pdb"],parsed_args["chain"]], "_"))
-        seq = String(LongAminoAcidSeq(s[parse(Int, parsed_args["model"])][parsed_args["chain"]], standardselector, gaps=false))
+        seq = String(LongAminoAcidSeq(s[parsed_args["model"]][parsed_args["chain"]], standardselector, gaps=false))
         rec = FASTA.Record(id,seq)
         open(FASTA.Writer,join([id,".fasta"],""), width=60) do w
             write(w,rec)
