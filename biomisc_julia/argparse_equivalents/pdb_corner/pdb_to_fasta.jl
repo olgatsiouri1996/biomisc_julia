@@ -11,7 +11,7 @@ function parse_commandline()
             help = "input pdb file name of a pdb file from the same directory"
             required = true
         "--model"
-            help = "model to make the fasta file for. Type 1 if you have only 1 model. Default 1"
+            help = "model to make the fasta file for. Type 1 if you have only 1 model"
             arg_type = Int
             default = 1
             required = false
