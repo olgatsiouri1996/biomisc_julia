@@ -8,15 +8,17 @@ function parse_commandline()
     @add_arg_table s begin
         "--id"
             help = "input pdb ids"
+            required = true
         "--model"
             help = "model to make the pdb file for"
             arg_type = Int
             default = 1
             required = false
         "--chain"
-            help = "chain in model to make the pdb file for"    
-        "--out"
-            help = "output pdb file"
+            help = "chain in model to make the pdb file for"  
+            required = false
+            arg_type = String
+            default = "A" 
     end
     return parse_args(s)
 end
@@ -28,7 +30,7 @@ function main()
     downloadpdb(parsed_args["id"]) do fp
         s = read(fp, PDB)
         subpdb = s[parsed_args["model"]][parsed_args["chain"]]
-        writepdb(parsed_args["out"], subpdb)
+        writepdb(String(join([parsed_args["id"],parsed_args["chain"], ".pdb"], "_","")), subpdb)
     end
 end
 
