@@ -6,17 +6,21 @@ using Measures
 # input parameters function
 function parse_commandline()
 
-    s = ArgParseSettings(description = "creates a ramachandran plot by selecting the model of a pdb file")
+    s = ArgParseSettings(description = "creates a ramachandran plot by selecting the model of a pdb file and saves it in a pdf file with the pdb filename")
     @add_arg_table s begin
         "--pdb"
-            help = "input pdb file"
+            help = "input pdb filename or pdb id from PDB"
+            required = true
         "--model"
-            help = "model to select in the pdb file(default=1)"
+            help = "model to select in the pdb file"
             arg_type = Int
             default = 1
             required = false
-       	"--pdf"
-            help = "output pdf file"   
+       	"--mode"
+            help = "select either to inport a pdb file from the directory or to download from PDB. default is to download from PDB"
+            arg_type = Int
+            default = 1
+            required = false 
     end
     return parse_args(s)
 end
@@ -24,7 +28,15 @@ end
 function main()
     parsed_args = parse_commandline()
     println(parsed_args)
-	struc = read(parsed_args["pdb"], PDB)
+# select program
+
+	if parsed_args["mode"]==1
+		downloadpdb(parsed_args["pdb"]) do fp
+        struc = read(fp, PDB)
+    end
+	else
+		struc = read(join([parsed_args["pdb"],".pdb"],""), PDB)
+	end
 	phi_angles, psi_angles = ramachandranangles(struc[parsed_args["model"]], standardselector)
 	Plots.backend()
 	Plots.gr()
@@ -46,7 +58,7 @@ function main()
 	     bottom_margin=10mm,
 	     right_margin=10mm,
 	     top_margin=10mm)
-	savefig(parsed_args["pdf"])
+	savefig(join([parsed_args["pdb"],".pdf"],""))
 end
 
 main()
