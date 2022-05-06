@@ -10,7 +10,7 @@ function parse_commandline()
             help = "input multi-fasta file"
             required = true
         "--dir"
-            help = "directory to save the single-fasta files"
+            help = "directory to save the single-fasta files(relative or absolute path)"
             default = "."
             required = false
     end
