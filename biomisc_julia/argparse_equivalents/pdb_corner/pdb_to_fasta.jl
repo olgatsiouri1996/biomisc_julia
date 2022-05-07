@@ -5,7 +5,7 @@ using FASTX
 # input parameters function
 function parse_commandline()
 
-    s = ArgParseSettings(description = "read a pdb file from the current directory and convert it to fasta without the need to download it")
+    s = ArgParseSettings(description = "read a pdb file from the current directory and convert it to fasta")
     @add_arg_table s begin
         "--pdb"
             help = "input pdb file name of a pdb file from the same directory"
