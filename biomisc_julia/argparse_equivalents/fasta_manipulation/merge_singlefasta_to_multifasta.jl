@@ -7,7 +7,7 @@ function parse_commandline()
     s = ArgParseSettings(description = "merge many single-fasta files to a a multi-fasta file")
     @add_arg_table s begin
         "--dir"
-            help = "change directory to read the single-fasta files(relative or absolute path)"
+            help = "directory to read the single-fasta files(relative or absolute path)"
             default = "."
             required = false
         "--out"
@@ -21,10 +21,8 @@ function main()
     parsed_args = parse_commandline()
     println(parsed_args)
     # main
-    # change directory
-    cd(parsed_args["dir"])
     # read single-fasta files from directory
-    for f in filter(x -> endswith(x, "fasta"), readdir())
+    for f in filter(x -> endswith(x, "fasta"), readdir(parsed_args["dir"], join=true))
         reader = open(FASTA.Reader, f)
         # split each record to a seperate fasta file
         for record in reader
