@@ -24,7 +24,7 @@ function main()
     # read single-fasta files from directory
     for f in filter(x -> endswith(x, "fasta"), readdir(parsed_args["dir"], join=true))
         reader = open(FASTA.Reader, f)
-        # split each record to a seperate fasta file
+        # append each record to a multi-fasta file
         for record in reader
             open(FASTA.Writer,parsed_args["out"], width=60, append=true) do w
                 write(w,record)
