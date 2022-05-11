@@ -39,9 +39,9 @@ function main()
     reader = open(FASTA.Reader, parsed_args["in"])
     # choose output type
     if parsed_args["type"]==1
-        for record in reader
-            if FASTA.identifier(record) in ids
-                open(FASTA.Writer,parsed_args["out"], width=60, append=true) do w
+        open(FASTA.Writer,parsed_args["out"], width=60, append=true) do w
+            for record in reader
+                if FASTA.identifier(record) in ids
                     write(w,record)
                 end
             end

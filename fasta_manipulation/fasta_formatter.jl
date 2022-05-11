@@ -27,8 +27,8 @@ function main()
     # main
     reader = open(FASTA.Reader, parsed_args["in"])
     # change the number of characters per file for each fasta record and output to file
-    for record in reader
-        open(FASTA.Writer,parsed_args["out"], width=parsed_args["width"], append=true) do w
+    open(FASTA.Writer,parsed_args["out"], width=parsed_args["width"], append=true) do w
+        for record in reader
             write(w,record)
         end
     end
