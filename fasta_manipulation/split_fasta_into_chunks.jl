@@ -35,27 +35,36 @@ function main()
     println(parsed_args)
     # main
     reader = open(FASTA.Reader, parsed_args["in"])
-    # change the number of characters per file for each fasta record and output to file
-    for record in reader
-        for i in range(1, step= parsed_args["step"], length(FASTA.sequence(record)) - parsed_args["win"] + 1)
-            seq = SubString(String(FASTA.sequence(record)), i,Int(i + parsed_args["win"]))
-            id = String(join([FASTA.identifier(record),i,Int(i + parsed_args["win"])],"_"))
-            rec = FASTA.Record(id,FASTA.description(record),seq)
-            # choose output type
-            if parsed_args["type"]==1
-                open(FASTA.Writer,parsed_args["out"], width=60, append=true) do w
-                    write(w,rec)
-                end
-
-            else
-                # split each record to a seperate fasta file
-                open(FASTA.Writer,join([id,".fasta"],""), width=60) do w
+    # choose output type
+    if parsed_args["type"]==1
+        open(FASTA.Writer,parsed_args["out"], width=60, append=true) do w
+            # split by window and step
+            for record in reader
+                for i in range(1, step= parsed_args["step"], length(FASTA.sequence(record)) - parsed_args["win"] + 1)
+                    seq = SubString(String(FASTA.sequence(record)), i,Int(i + parsed_args["win"]))
+                    id = String(join([FASTA.identifier(record),i,Int(i + parsed_args["win"])],"_"))
+                    rec = FASTA.Record(id,FASTA.description(record),seq)
                     write(w,rec)
                 end
             end
+            close(reader)
         end
-    end
-    close(reader)
+
+            else
+                # split by window and step
+                for record in reader
+                    for i in range(1, step= parsed_args["step"], length(FASTA.sequence(record)) - parsed_args["win"] + 1)
+                        seq = SubString(String(FASTA.sequence(record)), i,Int(i + parsed_args["win"]))
+                        id = String(join([FASTA.identifier(record),i,Int(i + parsed_args["win"])],"_"))
+                        rec = FASTA.Record(id,FASTA.description(record),seq)
+                        # split each record to a seperate fasta file
+                        open(FASTA.Writer,join([id,".fasta"],""), width=60) do w
+                            write(w,rec)
+                        end
+                    end
+                end
+                close(reader)
+            end
 end
 
 main()

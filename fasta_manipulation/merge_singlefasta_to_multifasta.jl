@@ -22,15 +22,15 @@ function main()
     println(parsed_args)
     # main
     # read single-fasta files from directory
-    for f in filter(x -> endswith(x, "fasta"), readdir(parsed_args["dir"], join=true))
-        reader = open(FASTA.Reader, f)
-        # append each record to a multi-fasta file
-        for record in reader
-            open(FASTA.Writer,parsed_args["out"], width=60, append=true) do w
+    open(FASTA.Writer,parsed_args["out"], width=60, append=true) do w
+        for f in filter(x -> endswith(x, "fasta"), readdir(parsed_args["dir"], join=true))
+            reader = open(FASTA.Reader, f)
+            # append each record to a multi-fasta file
+            for record in reader
                 write(w,record)
             end
+            close(reader)
         end
-        close(reader)
     end
 end
 
