@@ -23,10 +23,10 @@ function main()
     parsed_args = parse_commandline()
     println(parsed_args)
     reader = open(FASTA.Reader, parsed_args["in"])
-    open(parsed_args["out"],"a") do io
+    open(FASTA.Writer,parsed_args["out"], width=60, append=true) do w
         for record in reader
             if parse(Int, parsed_args["min"]) < length(FASTA.sequence(record)) < parse(Int, parsed_args["max"])
-                println(io,record)
+                write(w,record)
             end
         end
     end    
