@@ -4,7 +4,7 @@ using FASTX
 # input parameters function
 function parse_commandline()
 
-    s = ArgParseSettings(description = "add a left or right adapter or both a in a single or multi-fasta file")
+    s = ArgParseSettings(description = "add a left or right adapter or both in a single or multi-fasta file")
     @add_arg_table s begin
         "--in"
             help = "input single or multi-fasta file"
